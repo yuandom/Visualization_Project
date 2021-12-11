@@ -1,0 +1,345 @@
+<!-- Part of this code uses Pasha's example code in VizJS library
+Pasha (2018) Viz: A Collection of visualization layouts. [Source Code]. https://github.com/NPashaP/Viz-->
+
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+text{
+	font-size:12px;
+}
+.mainBars rect{
+  shape-rendering: auto;
+  fill-opacity: 0;
+  stroke-width: 0.5px;
+  stroke: rgb(0, 0, 0);
+  stroke-opacity: 0;
+}
+.subBars{
+	shape-rendering:crispEdges;
+}
+.edges{
+	stroke:none;
+	fill-opacity:0.5;
+}
+.header{
+	text-anchor:middle;
+	font-size:16px;
+}
+line{
+	stroke:grey;
+}
+
+body {
+    background: #f9f8fd;
+    font-family: "Lexend Exa", sans-serif;
+}
+
+nav {
+    position: absolute;
+    top: 15px;
+    left: 40%;
+    transform: translateX(-50%);
+    display: inline-block;
+    border: 2px solid #ebecf1;
+    border-radius: 30px;
+    animation: slide-in 1s ease-out;
+}
+
+ul {
+    position: relative;
+    display: flex;
+    flex: 1 1 auto;
+    margin: 0;
+    padding: 0 30px;
+    list-style-type: none;
+}
+
+ul li:not(:last-child) {
+    margin-right: 40px;
+}
+
+ul li {
+    border: 2px solid transparent;
+    border-radius: 5px;
+    padding: 10px;
+    transition: background 0.2s;
+}
+
+ul li a {
+    color: #2375d8;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+}
+
+ul li ul {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    display: block;
+    margin: 12px -12px;
+    padding: 0;
+    background: #ffa91b;
+    border: 2px solid #f7c833;
+    border-right: 2px solid #f89329;
+    border-bottom: 2px solid #f89329;
+    border-radius: 5px;
+    transition: opacity 0.2s, visibility 0.2s;
+}
+
+ul li ul li {
+    margin: -2px 0 0 -2px;
+    width: calc(100% - 20px);
+    line-height: 1.7;
+}
+
+ul li ul li a {
+    color: #2375d8;
+}
+
+ul li:hover {
+    background: #ec4138;
+    border: 2px solid #f05749;
+    border-right: 2px solid #e02a21;
+    border-bottom: 2px solid #e02a21;
+}
+
+ul li:hover a {
+    color: #f9f8fd;
+}
+
+ul li:hover ul {
+    visibility: visible;
+    opacity: 1;
+    box-shadow: 0px 3px 5px 2px #ebecf1;
+}
+
+ul li:hover ul li a {
+    color: #f9f8fd;
+}
+
+@keyframes slide-in {
+    0% {
+        top: -50px;
+    }
+    40% {
+        top: 20px;
+    }
+    70% {
+        top: 10px;
+    }
+    100% {
+        top: 15px;
+    }
+}
+
+
+</style>
+<head>
+	<link href="style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<form action="google.com" method="GET">
+	  <p id="form-title">Choose Year</h2>
+	<div id="debt-amount-slider">
+		<input type="radio" name="debt-amount" id="1" value="1" onclick="change()" required>
+		<label for="1" data-debt-amount="2015"></label>
+		<input type="radio" name="debt-amount" id="2" value="2" onclick="change2()" required>
+		<label for="2" data-debt-amount="2016"></label>
+		<input type="radio" name="debt-amount" id="3" value="3" onclick="change3()" required>
+		<label for="3" data-debt-amount="2017"></label>
+		<input type="radio" name="debt-amount" id="4" value="4" onclick="change4()" required>
+		<label for="4" data-debt-amount="2018"></label>
+		<input type="radio" name="debt-amount" id="5" value="5" onclick="change5()" required>
+		<label for="5" data-debt-amount="2019"></label>
+		<div id="debt-amount-pos"></div>
+	</div>
+</form>
+	<nav>
+		<ul>
+			<li>
+				<a href="index.html">Home</a>
+			</li>
+		  <li>
+			  <a href="#0">Business Skills</a>
+			  <ul>
+				<li><a href="#0">Arts, entertainment and recreation</a></li>
+				<li><a href="#0">Financial and insurance activities</a></li>
+				<li><a href="#0">Information and communication</a></li>
+				<li><a href="#0">Manufacturing</a></li>
+				<li><a href="#0">Mining and quarrying</a></li>
+				<li><a href="#0">Professional scientific and technical activities</a></li>
+			  </ul>
+		  </li>
+		  <li>
+			  <a href="#0">Disruptive Tech Skills</a>
+			  <ul>
+				<li><a href="index_detailx2.html">Arts, entertainment and recreation</a></li>
+				<li><a href="#0">Financial and insurance activities</a></li>
+				<li><a href="#0">Information and communication</a></li>
+				<li><a href="#0">Manufacturing</a></li>
+				<li><a href="#0">Mining and quarrying</a></li>
+				<li><a href="#0">Professional scientific and technical activities</a></li>
+			  </ul>
+		  </li>
+		  <li>
+			<a href="#0">Soft Skills</a>
+			<ul>
+			  <li><a href="#0">Arts, entertainment and recreation</a></li>
+			  <li><a href="index_detailz2.html">Financial and insurance activities</a></li>
+			  <li><a href="#0">Information and communication</a></li>
+			  <li><a href="#0">Manufacturing</a></li>
+			  <li><a href="#0">Mining and quarrying</a></li>
+			  <li><a href="#0">Professional scientific and technical activities</a></li>
+			</ul>
+		  </li>
+		  <li>
+			<a href="#0">Specialized Industry Skills</a>
+			<ul>
+				<li><a href="#0">Arts, entertainment and recreation</a></li>
+				<li><a href="#0">Financial and insurance activities</a></li>
+				<li><a href="#0">Information and communication</a></li>
+				<li><a href="#0">Manufacturing</a></li>
+				<li><a href="#0">Mining and quarrying</a></li>
+				<li><a href="#0">Professional scientific and technical activities</a></li>
+			  </ul>
+		  </li>
+		  <li>
+			  <a href="#0">Tech Skills</a>
+			  <ul>
+				<li><a href="#0">Arts, entertainment and recreation</a></li>
+				<li><a href="#0">Financial and insurance activities</a></li>
+				<li><a href="#0">Information and communication</a></li>
+				<li><a href="#0">Manufacturing</a></li>
+				<li><a href="#0">Mining and quarrying</a></li>
+				<li><a href="#0">Professional scientific and technical activities</a></li>
+			  </ul>
+		  </li>
+		</ul>
+	  </nav>
+
+<svg width="90" height="200">
+	<g transform="translate(250,50)"></g>
+</svg>		
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="http://vizjs.org/viz.v1.1.0.min.js"></script>
+<script src="./mouse.js"></script>
+<script>
+
+// soft skills to financial
+var data=[['Active Learning', 'Financial Services', 0.000246],
+ ['Communication', 'Banking', 0.0044139999999999995],
+ ['Communication', 'Financial Services', 0.0067540000000000005],
+ ['Communication', 'Insurance', 0.007572],
+ ['Communication', 'Investment Banking', 0.0038],
+ ['Communication', 'Investment Management', 0.004404],
+ ['Communication', 'Venture Capital & Private Equity', 0.008542],
+ ['Leadership', 'Banking', 0.026454],
+ ['Leadership', 'Financial Services', 0.02661],
+ ['Leadership', 'Insurance', 0.030901999999999995],
+ ['Leadership', 'Investment Banking', 0.013496],
+ ['Leadership', 'Investment Management', 0.016616000000000002],
+ ['Leadership', 'Venture Capital & Private Equity', 0.02453],
+ ['Negotiation', 'Banking', 0.004679999999999999],
+ ['Negotiation', 'Financial Services', 0.0036040000000000004],
+ ['Negotiation', 'Insurance', 0.00682],
+ ['Negotiation', 'Investment Banking', 0.004686],
+ ['Negotiation', 'Investment Management', 0.00533],
+ ['Negotiation', 'Venture Capital & Private Equity', 0.006606000000000001],
+ ['Teamwork', 'Banking', 0.008852000000000002],
+ ['Teamwork', 'Financial Services', 0.007338],
+ ['Teamwork', 'Insurance', 0.005686],
+ ['Teamwork', 'Investment Banking', 0.005019999999999999],
+ ['Teamwork', 'Investment Management', 0.004604],
+ ['Teamwork', 'Venture Capital & Private Equity', 0.00598],
+ ['Time Management', 'Banking', 0.0022459999999999997],
+ ['Time Management', 'Financial Services', 0.004894],
+ ['Time Management', 'Insurance', 0.004961999999999999],
+ ['Time Management', 'Investment Banking', 0.0010500000000000002],
+ ['Time Management', 'Investment Management', 0.002124],
+ ['Time Management', 'Venture Capital & Private Equity', 0.001432],
+ ['Writing', 'Banking', 0.00023999999999999998],
+ ['Writing', 'Financial Services', 0.000906],
+ ['Writing', 'Insurance', 0.00048199999999999995]];
+var color ={'Active Learning':"#3366CC", 'Communication':"#DC3912",  'Leadership':"#FF9900", 'Negotiation':"#109618", 'Teamwork':"#990099", 
+           'Time Management':"#FF5733", 'Writing':"#3CCA38"};
+
+var svg = d3.select("body").append("svg").attr("width", 960).attr("height", 800);
+
+svg.append("text").attr("x",250).attr("y",50)
+	.attr("class","header").text("Bipartite graph visualization of skills & industry");
+	
+
+var g =[svg.append("g").attr("transform","translate(150,100)")
+		,svg.append("g").attr("transform","translate(650,100)")];
+
+var bp=[ viz.bP()
+		.data(data)
+		.min(12)
+		.pad(1)
+		.height(600)
+		.width(200)
+		.barSize(35)
+		.fill(d=>color[d.primary])		
+	,viz.bP()
+		.data(data)
+		.value(d=>d[2])
+		.min(12)
+		.pad(1)
+		.height(600)
+		.width(200)
+		.barSize(35)
+		.fill(d=>color[d.primary])
+];
+		
+[0].forEach(function(i){
+	g[i].call(bp[i])
+	
+	g[i].append("text").attr("x",-50).attr("y",-8).style("text-anchor","middle").text("Skill Group");
+	g[i].append("text").attr("x", 250).attr("y",-8).style("text-anchor","middle").text("Industry Group");
+	
+	g[i].append("line").attr("x1",-100).attr("x2",0);
+	g[i].append("line").attr("x1",200).attr("x2",300);
+	
+	g[i].append("line").attr("y1",600).attr("y2",600).attr("x1",-100).attr("x2",0);
+	g[i].append("line").attr("y1",600).attr("y2",600).attr("x1",200).attr("x2",300);
+	
+	g[i].selectAll(".mainBars")
+		.on("mouseover",mouseover)
+		.on("mouseout",mouseout);
+
+	g[i].selectAll(".mainBars").append("text").attr("class","label")
+		.attr("x",d=>(d.part=="primary"? -30: 30))
+		.attr("y",d=>+6)
+		.text(d=>d.key)
+		.attr("text-anchor",d=>(d.part=="primary"? "end": "start"));
+	
+	g[i].selectAll(".mainBars").append("text").attr("class","perc")
+		.attr("x",d=>(d.part=="primary"? -40: 40))
+		.attr("y",d=>+18)
+		.text(function(d){ return d3.format("0.0%")(d.percent)})
+		.attr("text-anchor",d=>(d.part=="primary"? "end": "start"));
+});
+
+function mouseover(d){
+	[0,1].forEach(function(i){
+		bp[i].mouseover(d);
+		
+		g[i].selectAll(".mainBars").select(".perc")
+		.text(function(d){ return d3.format("0.0%")(d.percent)});
+	});
+}
+function mouseout(d){
+	[0,1].forEach(function(i){
+		bp[i].mouseout(d);
+		
+		g[i].selectAll(".mainBars").select(".perc")
+		.text(function(d){ return d3.format("0.0%")(d.percent)});
+	});
+}
+d3.select(self.frameElement).style("height", "800px");
+d3.select("svg").remove();
+</script>
+</body>
+</html>
